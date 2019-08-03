@@ -1,0 +1,83 @@
+####################################################################
+COMANDI BASH:
+# aggiungere comandi a bash
+source /opt/ros/melodic/setup.bash              # aggiunge comandi ros in bash
+source /path_to_workspace/devel/setup.bash      # aggiunge i comandi del workspace in bash 
+
+
+
+
+####################################################################
+COMANDI CATKIN:
+# inizializzazione
+catkin init
+
+# creare package dentro a src
+catkin create pkg nome_pacchetto --catkin-deps nome_pacchetto_da_cui_dipende
+NB: verranno creati un CMakeLists.txt e un manifesto chiamato package.xml
+NB: ogni package deve avere la sua directory
+
+# visualizzare lista package
+catkin list
+
+# buildare i sorgenti -> in qualsiasi cartella del workspace
+catkin build
+
+
+
+
+####################################################################
+TAG PACKAGE.XML
+<name>                  -> nome package
+<version>               -> numero versione (x.y.z)
+<description>           -> descrizione package
+<maintainer>            -> nome persona responsabile sviluppo e mantenimento package
+<license>               -> tipo di licenza
+<buildtool_depend>      -> tool di build necessari per compilare il pkg (solo catkin di solito) 
+<build_depend>          -> pkg necessari per compilare il pkg corrente 
+<run_depend>            -> dipenze per eseguire il pkg corrente (librerie dinamiche di sistema o di altri pkg)
+<test_depend>           -> dipenze extra per il test (NB: non devono duplicare dipenze di build e run) 
+
+
+
+    
+####################################################################
+STRUTTURA:
+Master      -> demone che permette ai nodi di vedersi
+Nodo        -> eseguibile che sfrutta ros per comunicare
+rosout      -> stdout/stderr di ros
+roscore     -> Master + rosout + parameter server
+Topic       -> i nodi si possono sottoscrivere ad un topic dove possono inviare Messaggi
+Messaggi    -> tipi di dato ROS che definiscono il tipo/formato dati scambiati attraverso topic
+
+
+COMANDI ROS:
+rospack                         #per ottenere informazioni sui pkg installati
+rospack list                    #visualizza la lista di tutti i pkg installati
+roscd                           #per spostarsi tra i pkg installati senza dover specificare il path
+rosls                           #elanca i file di un pkg
+rosrun                          #lancia(=esegue) un nodo contenuto in un pkg
+
+rosnode                         #per ottenere informazioni sui nodi in esecuzione
+rosnode list                    #visualizza la lista dei nodi in esecuzione
+rosnode info [nome_nodo]        #informazioni dettagliate sul nodo "nome_nodo"
+rosrun [nome_pkg] [nome_nodo]   #esegue il nodo "nome_nodo" nel pkg "nome_pkg"
+
+rostopic [command] -h               #per ottenere parametri su "command"
+rostopic list -v                    #per ottenere la lista verbosa dei topic
+rostopic echo [nome_topic]          #per vedere i dati pubblicati su un topic specifico
+rostopic type [nome_topic]          #per ottenere informazioni su un "nome_topic"
+rosmsg show [tipo_dato]             #per ottenere informazioni su un "tipo_dato"
+rostopic type [a] | rosmsg show     #per ottenere informazioni sui tipi di dato pubblicati da "a"
+
+rostopic pub [topic_name][tipo_msg][argomenti]      #per pubblicare su "topic_name" un topic già disponibile
+    -> -1 per indicare di pubblica un messaggio e poi uscire
+    -> -r [n] per specificare con che frequenza pubblicare il messaggio
+    -> -- prima di args per indicare che ciò che c'è dopo non è un opzione (permette di scrive numeri negativi)
+
+rosservice                           #per usare un servizio
+rosservice call [name][args]         #per chiamare un servizio "name"
+
+
+
+
