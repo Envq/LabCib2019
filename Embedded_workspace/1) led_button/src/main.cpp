@@ -18,7 +18,7 @@ int main() {
     val = input.read();
 
     led.write(val);
-    printf("%i\n", val);
+    printf("%f\n", val);
 
   }
 }
