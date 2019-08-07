@@ -1,7 +1,9 @@
 ERRORI:
 1) build nel nodo (andava prima inizializzato il catkin workspace poi inserito il nodo in src/)
 2) lab_cib_2019_ros_generate_messages_cpp al posto di prostate in CMakeLists.txt
-
+3) <build_depend>roscpp</build_depend>
+    <build_export_depend>roscpp</build_export_depend>
+    <exec_depend>roscpp</exec_depend>
 
 
 ros_master legge i valori dal seriale della scheda e li pubblica su il topic lab_cib_2019

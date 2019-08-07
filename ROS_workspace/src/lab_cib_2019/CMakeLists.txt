@@ -154,6 +154,10 @@ add_executable(lab_cib_main src/lab_cib_main.cpp src/Serial.cpp)
 add_dependencies(lab_cib_main lab_cib_2019_ros_generate_messages_cpp)
 target_link_libraries(lab_cib_main ${catkin_LIBRARIES})
 
+add_executable(lab_cib_counter src/counter.cpp)
+add_dependencies(lab_cib_counter lab_cib_2019_ros_generate_messages_cpp)
+target_link_libraries(lab_cib_counter ${catkin_LIBRARIES})
+
 #############
 ## Install ##
 #############

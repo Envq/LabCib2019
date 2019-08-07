@@ -5,7 +5,9 @@
 SerialAck pc(USBTX, USBRX, 921600); // tx, rx, speed
 
 bool led_on = false;
-bool button_pressed = true;
+bool button_before = false;
+bool button_now = false;
+bool button_pressed = false;
 float potentiometer_value = 0.0f;
 
 // LED
@@ -21,32 +23,38 @@ void master() {
     char buf[256];
     
     do{
-        
-        // if(button_pressed!=userButton.read()) {
-        //     button_pressed = userButton.read();
-        //     led_on = !led_on;
-        // }
-
-        // pulsante premuto == 0
-        if(userButton.read() == 0) {
-            led_on = 1;
-            button_pressed = 1;
-        } else {
-            led_on = 0;
-            button_pressed = 0;
-        }
-
+        // read potentiometer value
         potentiometer_value = potentiometer.read();
-        if(led_on==false) {
-            led.write(0);
-        } else {
-            led.write(potentiometer_value);
+
+        // read button_now value
+        button_now = !userButton.read();
+
+        // update button and led status
+        if (button_now == true && button_before == false) {
+            button_pressed = true;
+            led_on = !led_on;
         }
 
-        sprintf(buf,"%i,%i,%f\n",led_on,button_pressed,potentiometer_value);
+        // update led value
+        if (led_on) {
+            led.write(potentiometer_value);
+        } else {
+            led.write(0);
+        }
+
+
+        // update serial
+        sprintf(buf,"%i,%i,%f\n", led_on, button_pressed, potentiometer_value);
         pc.writeWithIdentifier(buf,'s');
+
+
+        // update variables
+        button_before = button_now;
+        button_pressed = false;
+
+
+
         wait(0.01f);
-        //wait(1);
 
     }while(true);
 }
