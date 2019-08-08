@@ -8,9 +8,9 @@ long unsigned int counter = 0;
 
 
 // funzione di callback invocata alla ricezione di un messaggio
-void labCibCallBack(const lab_cib_2019::board_status::ConstPtr& msg) {
+void counterCallBack(const lab_cib_2019::board_status::ConstPtr& msg) {
     // update counter if button was pressed
-    if (msg->button_pressed == 1) {
+    if (msg->button_pressed == true) {
         counter++;
         ROS_INFO("Count: %li", counter);
     }
@@ -32,7 +32,7 @@ int main(int argc, char** argv) {
 
     // creo il subscriber.
     // Esso si sottoscrive al Master chiedendo di riceve messaggi del lab_cib_topic
-    ros::Subscriber sub = node.subscribe<lab_cib_2019::board_status>("lab_cib_topic", 1000, labCibCallBack);
+    ros::Subscriber sub = node.subscribe<lab_cib_2019::board_status>("lab_cib_topic", 1000, counterCallBack);
     
     // creo il publisher.
     // Esso pubblica sul topic counter_topic
