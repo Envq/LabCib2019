@@ -93,8 +93,8 @@ int main() {
     asm(".global _printf_float");
 
 
-    // master();
-    slave();
+    master();
+    // slave();
 
     return 0;
 }
