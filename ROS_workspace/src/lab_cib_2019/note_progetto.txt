@@ -1,7 +1,7 @@
 ELABORATO:
 1) Compilare package ROS fornito e far funzionare il nodo contenuto (ci sono almeno 3 errori da segnalare)
 - è stata fatta la build nel nodo (andava prima inizializzato il catkin workspace poi inserito il nodo in src/)
-- lab_cib_2019_ros_generate_messages_cpp al posto di prostate in CMakeLists.txt
+- è stato scritto prostate_ros_generate_messages_cpp al posto di lab_cib_2019_generate_messages_cpp in CMakeLists.txt
 - mancano le dipendenze a roscpp
 - secondo la wiki http://wiki.ros.org/ROS/Tutorials/CreatingMsgAndSrv mancavano anche:
 -- <exec_depend>message_runtime</exec_depend>
@@ -18,10 +18,15 @@ ELABORATO:
 
 
 3) Scrivere un nodo che conta il numero di volte che viene premuto il tasto sulla board, lo stampa su terminale e lo pubblica su un topic
-
+- rosrun lab_cib_2019 lab_cib_2019_counter
 
 >>> caricare sulla board nucleo f446RE il firmware dello Slave
 
 
 4) Scrivere un nodo che modifica la frequenza di lampeggio del led oppure l’intensità della luminosità sulla base del valore impostato da
 un topic ros
+- rosrun lab_cib_2019 lab_cib_2019_led_controller
+- rostopic echo /counter_topic -> per visualizzare i messaggi inviati
+- rostopic pub /counter_topic std_msgs/Int64 5 -> per impostare l'intensità o frequenza
+-- intensità -> valori da 0 a 10
+-- frequenza -> il valore rappresenta il periodo in secondi

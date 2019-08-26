@@ -11,7 +11,7 @@ find_package(catkin REQUIRED COMPONENTS
     roscpp
     rospy
     std_msgs
-    message_generation
+    genmsg
 )
 
 ## System dependencies are found with CMake's conventions
@@ -103,9 +103,9 @@ generate_messages(
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
-#  INCLUDE_DIRS include
-#  LIBRARIES lab_cib_2019
-  CATKIN_DEPENDS message_runtime
+ INCLUDE_DIRS include
+ LIBRARIES lab_cib_2019
+ CATKIN_DEPENDS message_runtime
 #  DEPENDS system_lib
 )
 
@@ -151,16 +151,16 @@ include_directories(
 # )
 
 add_executable(lab_cib_main src/lab_cib_main.cpp src/Serial.cpp)
-add_dependencies(lab_cib_main lab_cib_2019_ros_generate_messages_cpp)
 target_link_libraries(lab_cib_main ${catkin_LIBRARIES})
+add_dependencies(lab_cib_main lab_cib_2019_generate_messages_cpp)
 
 add_executable(lab_cib_counter src/counter.cpp)
-add_dependencies(lab_cib_counter lab_cib_2019_ros_generate_messages_cpp)
 target_link_libraries(lab_cib_counter ${catkin_LIBRARIES})
+add_dependencies(lab_cib_counter lab_cib_2019_generate_messages_cpp)
 
 add_executable(lab_cib_led_controller src/ledController.cpp src/Serial.cpp)
-add_dependencies(lab_cib_led_controller lab_cib_2019_ros_generate_messages_cpp)
 target_link_libraries(lab_cib_led_controller ${catkin_LIBRARIES})
+add_dependencies(lab_cib_led_controller lab_cib_2019_generate_messages_cpp)
 
 #############
 ## Install ##
