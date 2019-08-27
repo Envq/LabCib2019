@@ -38,6 +38,7 @@ int main(int argc, char** argv) {
     // Esso pubblica sul topic counter_topic
     pub = node.advertise<std_msgs::Int64>("counter_topic", 1000);
 
+    ROS_INFO("Starter count: %f", counter);
 
 
     // setto il rate del loop

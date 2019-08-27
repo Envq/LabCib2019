@@ -7,6 +7,8 @@ ELABORATO:
 -- <exec_depend>message_runtime</exec_depend>
 -- catkin_package(CATKIN_DEPENDS message_runtime)
 
+>>> NB: ogni terminale nuovo aperto necessita del comando: source path_ROS_WORKSPACE/devel/setup.bash
+
 
 >>> caricare sulla board nucleo f446RE il firmware del Master
 
@@ -19,6 +21,8 @@ ELABORATO:
 
 3) Scrivere un nodo che conta il numero di volte che viene premuto il tasto sulla board, lo stampa su terminale e lo pubblica su un topic
 - rosrun lab_cib_2019 lab_cib_2019_counter
+- rostopic echo /counter_topic
+
 
 >>> caricare sulla board nucleo f446RE il firmware dello Slave
 

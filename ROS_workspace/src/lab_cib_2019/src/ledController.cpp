@@ -102,7 +102,7 @@ void do_frequency() {
 void frequencyCallBack(const std_msgs::Int64::ConstPtr& msg) {
     // get frequency
     frequency = 1.0 / msg->data;		//msg-data = seconds
-    ROS_INFO("frequency: %f", frequency);
+    ROS_INFO("frequency: %f hz", frequency);
 }
 
 
@@ -111,7 +111,7 @@ void frequency_main(int argc, char** argv) {
     ros::init(argc, argv, "frequency");    
     ros::NodeHandle node;
     ros::Subscriber sub = node.subscribe<std_msgs::Int64>("counter_topic", 1000, frequencyCallBack);
-	ROS_INFO("starter frequency: %f", frequency);
+	ROS_INFO("starter frequency: %f hz", frequency);
 
     // setto il rate del loop
     ros::Rate loop_rate(frequency);
